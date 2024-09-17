@@ -1,4 +1,5 @@
 # Paradigmas de la Programación TPs
 Integrantes: 
-            Camila Figueroa Cillo, Padron: 111204
+            Camila Figueroa, Padrón: 111204
+            Bruno Kuznicki, Padrón: 111413
 
