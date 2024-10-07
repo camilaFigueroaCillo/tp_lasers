@@ -8,7 +8,7 @@ public class BloqueOpaco extends Bloque {
         super(celda, tipo);
     }
 
-    public boolean dirigirLaser(Laser laser, List<Laser> recorrido, Coordenada ini, Coordenada actual) {
+    public boolean dirigirLaser(Laser laser, List<Laser> recorrido) {
         return false;
     }
 

@@ -4,8 +4,8 @@ public class Objetivo {
     private final Coordenada coordenada;
     private boolean apuntado;
 
-    public Objetivo(int f, int c) {
-        this.coordenada = new Coordenada(c, f);
+    public Objetivo(Coordenada coordenada) {
+        this.coordenada = coordenada;
         this.apuntado = false;
     }
 

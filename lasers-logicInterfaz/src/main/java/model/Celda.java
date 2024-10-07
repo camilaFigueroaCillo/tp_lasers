@@ -48,8 +48,8 @@ public class Celda {
         return bloque;
     }
 
-    public void interactuarConLaser(Laser laser, List<Laser> recorrido, Coordenada actual) {
-            this.bloque.dirigirLaser(laser, recorrido, this.posIni, actual);
+    public void interactuarConLaser(Laser laser, List<Laser> recorrido) {
+            this.bloque.dirigirLaser(laser, recorrido);
     }
 
     public Coordenada getPosIni() {

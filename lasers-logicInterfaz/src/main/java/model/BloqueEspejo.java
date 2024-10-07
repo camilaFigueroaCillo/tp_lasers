@@ -8,9 +8,10 @@ public class BloqueEspejo extends Bloque implements Espejar {
         super(celda, tipo);
     }
 
-    public boolean dirigirLaser(Laser laser, List<Laser> recorrido, Coordenada ini, Coordenada actual) {
-        Coordenada nueva = espejarLaser(laser.getDireccion(), actual);
-        Coordenada nuevaPos = actual.sumar(nueva);
+    public boolean dirigirLaser(Laser laser, List<Laser> recorrido) {
+        Coordenada ultPos = laser.getUltimaPos();
+        Coordenada nueva = espejarLaser(laser.getDireccion(), ultPos);
+        Coordenada nuevaPos = ultPos.sumar(nueva);
         Direccion dir = Direccion.coordToDir(nueva);
         laser.cambiarDireccion(dir);
         laser.agregarPos(nuevaPos);

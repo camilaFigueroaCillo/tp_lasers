@@ -6,7 +6,7 @@ public class BloqueVidrio extends Bloque implements Espejar {
 
     public BloqueVidrio(Celda celda, Tipo tipo) {super(celda, tipo);}
 
-    public boolean dirigirLaser(Laser laser, List<Laser> recorrido, Coordenada ini, Coordenada actual) {
+    public boolean dirigirLaser(Laser laser, List<Laser> recorrido) {
         Laser nuevo = difractarLaser(laser, laser.getUltimaPos(), laser.getDireccionPos(), laser.getDireccion());
         recorrido.add(nuevo);
         return true;

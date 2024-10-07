@@ -33,7 +33,8 @@ public class Nivel {
 
     private void setObjetivos(List<List<Integer>> objs) {
         for (List obj: objs) {
-            objetivos.add(new Objetivo((int) obj.get(1), (int) obj.get(0)));
+            var coordenada = new Coordenada((int) obj.get(0), (int) obj.get(1));
+            objetivos.add(new Objetivo(coordenada));
         }
     }
 
@@ -105,7 +106,7 @@ public class Nivel {
             l.agregarPos(nuevaPosicion);
 
         } else {
-            actual.interactuarConLaser(l, lasers, ultPos);
+            actual.interactuarConLaser(l, lasers);
         }
 
         var nuevaPos = l.getUltimaPos();

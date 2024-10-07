@@ -11,18 +11,18 @@ public class BloqueCristal extends Bloque {
         super(celda, tipo);
     }
 
-    public boolean dirigirLaser(Laser laser, List<Laser> recorrido, Coordenada ini, Coordenada actual) {
-        refractarLaser(laser, laser.getDireccion(), laser.getDireccionPos(), actual);
+    public boolean dirigirLaser(Laser laser, List<Laser> recorrido) {
+        refractarLaser(laser, laser.getDireccion(), laser.getDireccionPos());
         return true;
     }
 
-    private boolean actualizarLaser(Laser laser, Coordenada posibleCoordenada, Coordenada posDireccion, Coordenada vector, Coordenada actual) {
+    private boolean actualizarLaser(Laser laser, Coordenada posibleCoordenada, Coordenada posDireccion, Coordenada vector) {
 
         // Para refractar el laser, suma dos posiciones en el eje correspondiente y luego suma una nueva posicion en el sentido de la direccion
 
         Coordenada ultPos = laser.getUltimaPos();
 
-        if  (posibleCoordenada.equals(actual)) {
+        if  (posibleCoordenada.equals(ultPos)) {
             laser.agregarPos(ultPos.sumar(vector));
             ultPos = laser.getUltimaPos();
             laser.agregarPos(ultPos.sumar(vector));
@@ -33,7 +33,7 @@ public class BloqueCristal extends Bloque {
         return false;
     }
 
-    private void refractarLaser(Laser laser, Direccion dir, Coordenada posDireccion, Coordenada actual) {
+    private void refractarLaser(Laser laser, Direccion dir, Coordenada posDireccion) {
 
         // Para cada direccion, obtiene las posibles coordenadas que pueden ser refractadas
         // Si se puede, la refracta
@@ -45,20 +45,20 @@ public class BloqueCristal extends Bloque {
 
         switch (dir) {
             case SE:
-                if (actualizarLaser(laser,izq, posDireccion, XE.getPos(), actual)) { return; }
-                actualizarLaser(laser,der, posDireccion, YN.getPos(), actual);
+                if (actualizarLaser(laser,izq, posDireccion, XE.getPos())) { return; }
+                actualizarLaser(laser,arriba, posDireccion, YN.getPos());
                 break;
             case SW:
-                if (actualizarLaser(laser,der, posDireccion, XW.getPos(), actual)) { return; }
-                actualizarLaser(laser,arriba, posDireccion, YN.getPos(), actual);
+                if (actualizarLaser(laser,der, posDireccion, XW.getPos())) { return; }
+                actualizarLaser(laser,arriba, posDireccion, YN.getPos());
                 break;
             case NE:
-                if (actualizarLaser(laser,izq, posDireccion, XE.getPos(), actual)) { return; }
-                actualizarLaser(laser,abajo, posDireccion, YS.getPos(), actual);
+                if (actualizarLaser(laser,izq, posDireccion, XE.getPos())) { return; }
+                actualizarLaser(laser,abajo, posDireccion, YS.getPos());
                 break;
             case NW:
-                if (actualizarLaser(laser,der, posDireccion, XW.getPos(), actual)) { return; }
-                actualizarLaser(laser,abajo, posDireccion, YS.getPos(), actual);
+                if (actualizarLaser(laser,der, posDireccion, XW.getPos())) { return; }
+                actualizarLaser(laser,abajo, posDireccion, YS.getPos());
                 break;
         }
     }

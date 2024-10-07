@@ -29,6 +29,6 @@ public abstract class Bloque {
         return true;
     }
 
-    public abstract boolean dirigirLaser(Laser laser, List<Laser> recorrido, Coordenada ini, Coordenada actual);
+    public abstract boolean dirigirLaser(Laser laser, List<Laser> recorrido);
 
 }
