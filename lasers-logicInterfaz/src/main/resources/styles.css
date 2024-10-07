@@ -1,0 +1,6 @@
+.vbox-background {
+    -fx-background-image: url("\laserojo.jpg");
+    -fx-background-size: cover; /* Escala la imagen para cubrir todo el Pane */
+    -fx-background-position: center; /* Centra la imagen */
+    -fx-background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
