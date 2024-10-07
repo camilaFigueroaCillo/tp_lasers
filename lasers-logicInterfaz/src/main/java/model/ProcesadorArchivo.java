@@ -128,9 +128,9 @@ public class ProcesadorArchivo {
             ------ EJEMPLO ------
 
             lasers = [
-                [fila, columna],
-                [fila, columna],
-                [fila, columna]
+                [columna, fila],
+                [columna, fila],
+                [columna, fila]
             ]
         */
 

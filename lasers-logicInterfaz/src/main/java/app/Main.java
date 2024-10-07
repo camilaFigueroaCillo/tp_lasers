@@ -54,7 +54,7 @@ public class Main extends Application {
     }
 
     private void cargarNivel(String rutaNivel, Stage stage) throws IOException {
-        // Se crea el nivel (procesando el archivo .tar) y la vista (a partir de ese nivel)
+        // Se crea el nivel (procesando el archivo .dat) y la vista (a partir de ese nivel)
         this.nivel = new Nivel(new ProcesadorArchivo(getClass().getResource(rutaNivel)));
 
         // Se crea e inicializa el controlador que se comunicará con la información procesada y con la parte gráfica
@@ -76,7 +76,7 @@ public class Main extends Application {
             // Agregamos el listener a botonNivel1
             Button button = (Button) root.lookup(tupla.getKey());
 
-            // Cuando se presione botonNivel, se ejecuta la función cargarNivel, que recibe por parámetro rutaNivel1
+            // Cuando se presione botonNivel, se ejecuta la función cargarNivel, que recibe por parámetro rutaNivel
             button.setOnAction(e -> {
                 try {
                     cargarNivel(tupla.getValue(), stage);
