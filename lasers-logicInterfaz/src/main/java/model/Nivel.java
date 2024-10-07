@@ -199,7 +199,7 @@ public class Nivel {
         return this.tablero.getColumnas();
     }
 
-    public void resetFromOrigin() {
+    private void resetFromOrigin() {
         lasers.removeIf(l -> nuevosLasers.contains(l));
         resetLasers();
         resetObjetivos();

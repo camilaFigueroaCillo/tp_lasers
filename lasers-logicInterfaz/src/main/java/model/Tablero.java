@@ -36,18 +36,9 @@ public class Tablero {
             //Por cada arreglo en tablero
             for (char c: arr) {
                 //Por cada caracter en el arreglo
-
                 Tipo tipo = Tipo.convertirATipo(c); //convierto el string a un tipo
-                Celda celdaActual = celdas.get(i); //accedo a la celda
-
-                if (tipo == Tipo.VACIO) {
-                    //Si es una celda sin piso, la inhabilito
-                    celdaActual.inhabilitar();
-                }
-                if (tipo != Tipo.PISO && tipo != Tipo.VACIO) {
-                    Bloque b = tipo.crearBloque(celdaActual);
-                    celdaActual.agregarBloque(b);
-                }
+                Celda celdaActual = celdas.get(i);
+                celdaActual.setTipo(tipo);
                 i++;
 
             }

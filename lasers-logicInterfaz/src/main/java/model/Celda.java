@@ -20,8 +20,14 @@ public class Celda {
         this.dimension = dim;
     }
 
-    public void inhabilitar() {
-        this.esPiso = false;
+    public void setTipo(Tipo tipo) {
+        if (tipo == Tipo.VACIO) {
+            this.esPiso = false;
+        }
+        if (tipo != Tipo.PISO && tipo != Tipo.VACIO) {
+            Bloque b = tipo.crearBloque(this);
+            this.bloque = b;
+        }
     }
 
     public boolean agregarBloque(Bloque b) {
