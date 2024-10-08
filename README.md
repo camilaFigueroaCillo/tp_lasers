@@ -7,7 +7,7 @@ Si tocó algún centro, significa que en la celda a la que llegué hay un bloque
 Caso contrario (no se encontró centro) significa que en esa celda no hay bloque, lo que indica que el láser siga avanzando en la dirección que venía.
 
 ## COORDENADAS IMPARES DE UNA CELDA
-De todas las coordenadas que posee una celda (9 en total), el láser sólo puede atravesar las impares. Como el laser siempre se mueve en una coordenada par y otra impar (por ejemplo, (0, 1) (2,1)), para los diferentes métodos que ???? se necesita saber en cuál de las coordenadas impares de la celda cayó el laser, principalmente porque según la direccion en la que viene el laser y la coordenada impar en la que caiga, varía en hacia dónde se debe bifurcar/desviar el laser
+De todas las coordenadas que posee una celda (9 en total), el láser sólo puede atravesar las impares. Como el laser siempre se mueve en una coordenada par y otra impar (por ejemplo, (0, 1) (2,1)), para dirigir el láser se necesita saber en cuál de las coordenadas impares de la celda cayó el laser, principalmente porque según la direccion en la que viene el laser y la coordenada impar en la que caiga, varía en hacia dónde se debe bifurcar/desviar el laser
 
 ## MOVIMIENTO DE BLOQUES
 Anteriormente habiamos creado una interfaz BloqueDesplazable con un único método Desplazar(Celda celda), y esta interfaz era implementada sólo por los bloques que pueden moverse. Esto ocasionaba que, al momento de movilizar un bloque, se debía verificar que éste sea un BloqueDesplazable y en base a ese estado ejecutar o no el movimiento, lo que violaba el principio "Tell, Don't Ask". Para evitar esto, decidimos incluir en la clase Bloque (dentro del método Desplazar()) la decisión de mover o no la instancia de Bloque según su tipo.
