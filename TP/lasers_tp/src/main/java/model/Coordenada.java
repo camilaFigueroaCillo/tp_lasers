@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Coordenada {
@@ -21,6 +23,13 @@ public class Coordenada {
 
     public Coordenada sumar(Coordenada b) {
         return new Coordenada(this.x + b.getX(), this.y + b.getY());
+    }
+
+    public List<Coordenada> getNormales() {
+        List<Coordenada> normales = new ArrayList<>();
+        normales.add(new Coordenada(-y, x));
+        normales.add(new Coordenada(y, -x));
+        return normales;
     }
 
     @Override

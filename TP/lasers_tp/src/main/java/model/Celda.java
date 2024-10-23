@@ -23,8 +23,7 @@ public class Celda {
             this.esPiso = false;
         }
         if (tipo != Tipo.PISO && tipo != Tipo.VACIO) {
-            Bloque b = tipo.crearBloque(this);
-            this.bloque = b;
+            this.bloque = tipo.crearBloque();
         }
     }
 
@@ -47,7 +46,7 @@ public class Celda {
     }
 
     public void interactuarConLaser(Laser laser, List<Laser> recorrido) {
-            this.bloque.dirigirLaser(laser, recorrido);
+            this.bloque.dirigirLaser(laser, recorrido, this);
     }
 
     public Coordenada getPosIni() {

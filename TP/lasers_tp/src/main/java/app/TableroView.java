@@ -188,4 +188,5 @@ public class TableroView {
             node.setOnMouseClicked(null);
         }
     }
+
 }

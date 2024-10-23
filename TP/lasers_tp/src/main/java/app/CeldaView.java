@@ -3,6 +3,7 @@ package app;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.Celda;
+import model.Tipo;
 
 public class CeldaView {
     // Dimensiones de la celda
@@ -27,23 +28,35 @@ public class CeldaView {
         rect.setY(SIZE_CELDA * fila/DIM);
 
         // Estilo visual por defecto (para las celdas vacías)
-        rect.setFill(Color.WHITE);
-        rect.setStroke(Color.BLACK);
 
         var bloque = celda.getBloque(); // obtenemos el bloque de la celda
+        rect.setStroke(Color.BLACK);
 
         // Para las celdas sin bloque: si tiene piso se pinta de gris claro, caso contrario se deja el blanco
+
         if (bloque == null) {
-            if (celda.esPiso()) {
-                rect.setFill(Color.LIGHTGRAY);
-                return rect;
-            } else {
-                return rect;
-            }
+            definirColorCelda(rect, celda.esPiso());
+            return rect;
         }
 
         // Para las celdas con bloque: se elige el color la celda según el tipo de bloque que contiene
-        switch (bloque.getTipo()) {
+
+        definirColorBloque(rect, bloque.getTipo());
+
+        return rect;
+    }
+
+    public void definirColorCelda(Rectangle rect, boolean esPiso) {
+        if (esPiso) {
+            rect.setFill(Color.LIGHTGRAY);
+        } else {
+            rect.setFill(Color.WHITE);
+        }
+    }
+
+    public void definirColorBloque(Rectangle rect, Tipo tipo) {
+
+        switch (tipo) {
             case OPACOFIJO:
                 rect.setFill(Color.DIMGREY);
                 break;
@@ -61,8 +74,6 @@ public class CeldaView {
                 break;
         }
 
-        return rect;
     }
-
 
 }

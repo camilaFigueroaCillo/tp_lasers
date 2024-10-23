@@ -1,6 +1,6 @@
 package model;
 
-import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public enum Tipo {
     VACIO(' ', null),
@@ -12,20 +12,19 @@ public enum Tipo {
     CRISTAL('C', BloqueCristal::new);
 
     private char tipo;
-    private BiFunction<Celda, Tipo, Bloque> cons;
+    private Function<Tipo, Bloque> cons;
 
-    Tipo(char tipo, BiFunction<Celda, Tipo, Bloque> cons) {
+    Tipo(char tipo, Function<Tipo, Bloque> cons) {
         this.tipo = tipo;
         this.cons = cons;
     }
 
-    public Bloque crearBloque(Celda celda) {
+    public Bloque crearBloque() {
         //A partir de un tipo, crea y retorna el bloque correspondiente a su tipo;
         if (cons == null) {
             return null;
         }
-        
-        return cons.apply(celda, this);
+        return cons.apply(this);
     }
 
     public static Tipo convertirATipo(char c) {

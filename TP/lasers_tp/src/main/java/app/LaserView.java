@@ -24,8 +24,9 @@ public class LaserView {
         /* Características visuales del laser */
 
         // Datos necesarios
-        var sizeRecorrido = laser.getRecorrido().size();
-        var posIni = laser.getPrimerPos();
+        var recorrido = laser.getRecorrido();
+        var sizeRecorrido = recorrido.size();
+        var posIni = recorrido.get(0);
 
         // Círculo ubicado en el origen del laser
         Circle origen = new Circle(8, Color.RED);
@@ -38,8 +39,8 @@ public class LaserView {
         // Se dibuja el recorrido del laser
         for (int i = 0; i < sizeRecorrido - 1; i++) {
 
-            Coordenada ini = laser.getRecorrido().get(i);
-            Coordenada fin = laser.getRecorrido().get(i + 1);
+            Coordenada ini = recorrido.get(i);
+            Coordenada fin = recorrido.get(i + 1);
 
             int pixelesIniX = getPosPixeles(ini, X);
             int pixelesIniY = getPosPixeles(ini, Y);

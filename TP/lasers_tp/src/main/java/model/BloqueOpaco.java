@@ -4,11 +4,11 @@ import java.util.List;
 
 public class BloqueOpaco extends Bloque {
 
-    public BloqueOpaco(Celda celda, Tipo tipo) {
-        super(celda, tipo);
+    public BloqueOpaco(Tipo tipo) {
+        super(tipo);
     }
 
-    public boolean dirigirLaser(Laser laser, List<Laser> recorrido) {
+    public boolean dirigirLaser(Laser laser, List<Laser> recorrido, Celda celda) {
         return false;
     }
 

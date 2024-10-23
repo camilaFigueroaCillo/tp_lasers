@@ -7,12 +7,12 @@ import static model.Direccion.YS;
 
 public class BloqueCristal extends Bloque {
 
-    public BloqueCristal(Celda celda, Tipo tipo) {
-        super(celda, tipo);
+    public BloqueCristal(Tipo tipo) {
+        super(tipo);
     }
 
-    public boolean dirigirLaser(Laser laser, List<Laser> recorrido) {
-        refractarLaser(laser, laser.getDireccion(), laser.getDireccionPos());
+    public boolean dirigirLaser(Laser laser, List<Laser> recorrido, Celda celda) {
+        refractarLaser(laser, laser.getDireccion(), laser.getDireccionPos(), celda);
         return true;
     }
 
@@ -33,7 +33,7 @@ public class BloqueCristal extends Bloque {
         return false;
     }
 
-    private void refractarLaser(Laser laser, Direccion dir, Coordenada posDireccion) {
+    private void refractarLaser(Laser laser, Direccion dir, Coordenada posDireccion, Celda celda) {
 
         // Para cada direccion, obtiene las posibles coordenadas que pueden ser refractadas
         // Si se puede, la refracta

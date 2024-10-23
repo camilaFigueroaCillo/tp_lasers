@@ -113,7 +113,7 @@ public class Nivel {
         }
         Bloque bloque = origen.getBloque();
 
-        if (bloque == null || !bloque.desplazar(destino)) {
+        if (bloque == null || !bloque.desplazar()) {
             return false;
         }
 

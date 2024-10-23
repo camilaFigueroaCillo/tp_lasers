@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Laser {
-
     private List<Direccion> dir = new ArrayList<>();
     private List<Coordenada> recorrido = new ArrayList<>();
 
@@ -36,10 +35,6 @@ public class Laser {
 
     public List<Coordenada> getRecorrido() {
         return recorrido;
-    }
-
-    public Coordenada getPrimerPos() {
-        return recorrido.get(0);
     }
 
     public void resetRecorrido() {

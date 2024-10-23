@@ -4,10 +4,8 @@ import java.util.List;
 
 public abstract class Bloque {
     private Tipo tipo;
-    protected Celda celda;
 
-    public Bloque(Celda celda, Tipo tipo) {
-        this.celda = celda;
+    public Bloque(Tipo tipo) {
         this.tipo = tipo;
     }
 
@@ -15,20 +13,17 @@ public abstract class Bloque {
         return tipo;
     }
 
-    public boolean desplazar(Celda destino) {
+    public boolean desplazar() {
         /*
-            Desplaza al bloque a la celda 'destino'
-            (a excepción de ser de tipo OPACOFIJO)
+            Verifica si el bloque es desplazable
         */
 
         if (tipo == Tipo.OPACOFIJO) {
             return false;
         }
-
-        this.celda = destino;
         return true;
     }
 
-    public abstract boolean dirigirLaser(Laser laser, List<Laser> recorrido);
+    public abstract boolean dirigirLaser(Laser laser, List<Laser> recorrido, Celda celda);
 
 }

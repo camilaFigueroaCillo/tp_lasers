@@ -4,13 +4,13 @@ import java.util.List;
 
 public class BloqueEspejo extends Bloque implements Espejar {
 
-    public BloqueEspejo(Celda celda, Tipo tipo) {
-        super(celda, tipo);
+    public BloqueEspejo(Tipo tipo) {
+        super(tipo);
     }
 
-    public boolean dirigirLaser(Laser laser, List<Laser> recorrido) {
+    public boolean dirigirLaser(Laser laser, List<Laser> recorrido, Celda celda) {
         Coordenada ultPos = laser.getUltimaPos();
-        Coordenada nueva = espejarLaser(laser.getDireccion(), ultPos);
+        Coordenada nueva = espejarLaser(laser.getDireccion(), ultPos, celda);
         Coordenada nuevaPos = ultPos.sumar(nueva);
         Direccion dir = Direccion.coordToDir(nueva);
         laser.cambiarDireccion(dir);
@@ -18,14 +18,17 @@ public class BloqueEspejo extends Bloque implements Espejar {
         return true;
     }
 
-    public Coordenada espejarLaser(Direccion direccion, Coordenada c) {
-        var dirCoord = direccion.getPos();
-        var normal1 = new Coordenada(-dirCoord.getY(), dirCoord.getX());
-        var normal2 = new Coordenada(dirCoord.getY(), -dirCoord.getX());
+    public Coordenada espejarLaser(Direccion direccion, Coordenada c, Celda celda) {
+        Coordenada dirCoord = direccion.getPos();
+        List<Coordenada> normales = dirCoord.getNormales();
+
+        var normal1 = normales.get(0);
+        var normal2 = normales.get(1);
+
         var nuevaPos1 = c.sumar(normal1);
         var nuevaPos2 = c.sumar(normal2);
 
-        List<Coordenada> centros = this.celda.getImpares();
+        List<Coordenada> centros = celda.getImpares();
 
         for (Coordenada centro: centros) {
             if (centro.equals(nuevaPos1)) {

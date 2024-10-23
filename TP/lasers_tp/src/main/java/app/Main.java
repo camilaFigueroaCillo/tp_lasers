@@ -16,12 +16,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class Main extends Application {
-
     private Nivel nivel;
-
-    public Main() throws IOException {
-
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
