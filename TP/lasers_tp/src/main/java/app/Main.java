@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import model.Nivel;
 import model.ProcesadorArchivo;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Map;
 
 public class Main extends Application {
@@ -78,7 +78,7 @@ public class Main extends Application {
         }
     }
 
-    public void comenzarJuego(Stage primaryStage) throws IOException {
+    private void comenzarJuego(Stage primaryStage) throws IOException {
         // Cargo el fxml
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gamePane2.fxml"));
         Pane root = loader.load();
@@ -120,22 +120,24 @@ public class Main extends Application {
 
     private void mostrarReglas() {
         /* Muestra una ventana que contiene las reglas del juego */
+
         Stage reglas = new Stage();
         reglas.setTitle("Reglas del juego");
 
         VBox texto = new VBox(10);
-        Label renglon_1 = new Label("Reglas: ");
-        Label renglon_2 = new Label("1. Elegir un bloque a mover y clickearlo");
-        Label renglon_3 = new Label("1. a. El único bloque inamovible es el de color gris oscuro, llamado OPACO FIJO. En caso de seleccionarlo, saldrá un error.");
 
-        Label renglon_4 = new Label("2. Elegir una celda vacia para mover el bloque, y clickearla");
-        Label renglon_5 = new Label("2. a. Las celdas vacías (es decir, aquellas donde se puede colocar un bloque) se reconocen por ser de color GRIS CLARO");
+        try (InputStream archivo = getClass().getResourceAsStream("/reglas.txt");
+             BufferedReader lector = new BufferedReader(new InputStreamReader(archivo))) {
 
-        Label renglon_6 = new Label("3. El juego se gana cuando todos los objs fueron apuntados por el laser");
+            String linea;
+            while ((linea = lector.readLine()) != null) {
+                Label label = new Label(linea);
+                texto.getChildren().add(label);
+            }
+        } catch (IOException e) {
+        }
 
-        texto.getChildren().addAll(renglon_1, renglon_2, renglon_3, renglon_4, renglon_5, renglon_6);
-
-        Scene scene = new Scene(texto, 400, 400);
+        Scene scene = new Scene(texto, 600, 500);
         reglas.setScene(scene);
         reglas.show();
     }

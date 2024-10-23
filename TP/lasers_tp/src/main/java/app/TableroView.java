@@ -39,8 +39,8 @@ public class TableroView {
         Group group = new Group();
         panel.getChildren().add(group);
         dibujarTablero(panel, root, group);
-        dibujarObjetivos(panel);
         dibujarLaser(panel);
+        dibujarObjetivos(panel);
     }
 
     private void dibujarTablero(Pane panel, Pane root, Group group) {
@@ -102,11 +102,7 @@ public class TableroView {
                 dibujarLaser(panel);
                 dibujarObjetivos(panel);
 
-                if (nivel.hayGanador()) {
-                    //Si hay ganador cambio el fondo a verde
-                    root.setStyle("-fx-background-color: #00FF00;");
-                    desactivarHandlers(group);
-                }
+                terminarJuego(nivel.hayGanador(), root, group);
 
             } else {
                 // Ocurrió un error (se informa al jugador)
@@ -134,7 +130,7 @@ public class TableroView {
         List<Objetivo> noApuntados = nivel.getObjetivosNoApuntados();
         List<Objetivo> apuntados = nivel.getObjetivosApuntados();
         agregarObjsAlPanel(noApuntados, Color.WHITESMOKE, panel);
-        agregarObjsAlPanel(apuntados, Color.INDIANRED, panel);
+        agregarObjsAlPanel(apuntados, Color.FIREBRICK, panel);
     }
 
     private void agregarObjsAlPanel(List<Objetivo> objs, Color color, Pane panel) {
@@ -181,6 +177,14 @@ public class TableroView {
         Scene scene = new Scene(renglon, 400, 400);
         alerta.setScene(scene);
         alerta.show();
+    }
+
+    private void terminarJuego(boolean debeTerminar, Pane root, Group group) {
+        if (debeTerminar) {
+            //Si hay ganador cambio el fondo a verde
+            root.setStyle("-fx-background-color: #00FF00;");
+            desactivarHandlers(group);
+        }
     }
 
     private void desactivarHandlers(Group group) {

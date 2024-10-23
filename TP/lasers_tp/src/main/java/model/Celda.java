@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Celda {
-
     private boolean esPiso = true;
     private Bloque bloque = null;
     private Coordenada posIni;

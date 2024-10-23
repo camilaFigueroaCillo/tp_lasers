@@ -29,7 +29,7 @@ public enum Tipo {
 
     public static Tipo convertirATipo(char c) {
 
-        // A partir de un char simbolizando el tipo, genera y retorna el Tipo correspondiente
+        // A partir de un char simbolizando el tipo, retorna el Tipo correspondiente
 
         for (Tipo t: Tipo.values()) {
             if (t.tipo == c) {

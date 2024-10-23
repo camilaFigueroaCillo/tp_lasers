@@ -1,6 +1,8 @@
 package app;
 
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import model.Celda;
 import model.Tipo;
@@ -32,7 +34,7 @@ public class CeldaView {
         var bloque = celda.getBloque(); // obtenemos el bloque de la celda
         rect.setStroke(Color.BLACK);
 
-        // Para las celdas sin bloque: si tiene piso se pinta de gris claro, caso contrario se deja el blanco
+        // Para las celdas sin bloque: si tiene piso se pinta de gris claro, caso contrario se deja en blanco
 
         if (bloque == null) {
             definirColorCelda(rect, celda.esPiso());
@@ -41,38 +43,46 @@ public class CeldaView {
 
         // Para las celdas con bloque: se elige el color la celda según el tipo de bloque que contiene
 
-        definirColorBloque(rect, bloque.getTipo());
+        definirRellenoBloque(rect, bloque.getTipo());
 
         return rect;
     }
 
-    public void definirColorCelda(Rectangle rect, boolean esPiso) {
+    private void definirColorCelda(Rectangle rect, boolean esPiso) {
         if (esPiso) {
-            rect.setFill(Color.LIGHTGRAY);
-        } else {
             rect.setFill(Color.WHITE);
+        } else {
+            rect.setStrokeWidth(0);
+            rect.setFill(Color.TRANSPARENT);
         }
     }
 
-    public void definirColorBloque(Rectangle rect, Tipo tipo) {
+    private void definirRellenoBloque(Rectangle rect, Tipo tipo) {
 
         switch (tipo) {
             case OPACOFIJO:
-                rect.setFill(Color.DIMGREY);
+                rellenarConImagen("/closed.jpg", rect);
                 break;
             case OPACOMOVIL:
-                rect.setFill(Color.GREY);
+                rellenarConImagen("/fijo.jpg", rect);
                 break;
             case ESPEJO:
-                rect.setFill(Color.DARKCYAN);
+                rellenarConImagen("/mirror.png", rect);
                 break;
             case CRISTAL:
-                rect.setFill(Color.CYAN);
+                rellenarConImagen("/crustal.jpg", rect);
                 break;
             case VIDRIO:
-                rect.setFill(Color.LIGHTBLUE);
+                rellenarConImagen("/glass.jpg", rect);
                 break;
         }
+
+    }
+
+    private void rellenarConImagen(String ruta, Rectangle rect) {
+        Image imagen = new Image(getClass().getResourceAsStream(ruta));
+        ImagePattern patron = new ImagePattern(imagen);
+        rect.setFill(patron);
 
     }
 

@@ -25,7 +25,7 @@ public class ObjetivoView {
 
         // Marca el color y el borde
         Circle objGrafico = new Circle(10, color);
-        objGrafico.setStroke(Color.RED);
+        objGrafico.setStroke(Color.FIREBRICK);
 
         // Marca la ubicación
         objGrafico.setCenterX(SIZE_CELDA * col/DIM);

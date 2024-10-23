@@ -1,20 +1,20 @@
 package model;
 
 public enum Direccion {
-    SE("SE", 1, 1),
-    SW("SW", 1, -1),
-    NE("NE", -1, 1),
-    NW("NW", -1, -1),
-    XE("XE", 0, 1),
-    XW("XW", 0, -1),
-    YN("YN", 1, 0),
-    YS("YS", -1, 0);
+    SE("SE", new Coordenada(1, 1)),
+    SW("SW", new Coordenada(-1, 1)),
+    NE("NE", new Coordenada(1, -1)),
+    NW("NW", new Coordenada(-1, -1)),
+    XE("XE", new Coordenada(1, 0)),
+    XW("XW", new Coordenada(-1, 0)),
+    YN("YN", new Coordenada(0, 1)),
+    YS("YS", new Coordenada(0, -1));
 
     private Coordenada pos;
     private String simbolo;
 
-    Direccion(String simbolo, int f, int c) {
-        this.pos = new Coordenada(c, f);
+    Direccion(String simbolo, Coordenada c) {
+        this.pos = c;
         this.simbolo = simbolo;
     }
 
@@ -30,7 +30,7 @@ public enum Direccion {
         return null;
     }
 
-    public static Direccion coordToDir(Coordenada c) {
+    public Direccion coordToDir(Coordenada c) {
 
         for (Direccion d: Direccion.values()) {
             if (d.pos.equals(c)) {

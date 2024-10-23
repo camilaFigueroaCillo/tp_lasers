@@ -1,5 +1,7 @@
 package model;
 
+import model.Direccion;
+
 import java.util.List;
 
 import static model.Direccion.*;

@@ -1,0 +1,18 @@
+    Reglas del juego:
+    El objetivo del juego es mover bloques para direccionar el laser y de esta manera poder
+    apuntar los objetivos con el laser.
+
+    Como jugar:
+        1. Elegir un bloque a mover y clickearlo
+        1. a. El único bloque inamovible es el negro con cinta amarilla, llamado 'Opaco fijo'.
+              En caso de seleccionarlo, saldrá un error.
+        2. Elegir una celda vacia (celda blanca) para mover el bloque, y clickearla.
+
+    Propiedades de los bloques:
+        1. Bloque 'Espejo': Se caracteriza por ser plateado. Si el laser choca con este bloque
+                          el mismo sigue su camino en la dirección contraria.
+        2. Bloque 'Opaco': Se caracteriza por ser negro. Si el laser choca con este bloque, corta su recorrido.
+        3. Bloque 'Opaco fijo': Se caracteriza por ser negro con cinta amarilla. Posee el mismo comportamiento
+           que el bloque 'Opaco' pero es inamovible.
+        4. Bloque 'Cristal': Se caracteriza por ser lila. Si el láser choca con este bloque, refracta su camino.
+        5. Bloque 'Vidrio': Se caracteriza por ser celeste. Si el láser choca con este bloque, difracta su camino.

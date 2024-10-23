@@ -1,5 +1,7 @@
 package model;
 
+import model.Direccion;
+
 import java.util.List;
 
 public class BloqueVidrio extends Bloque implements Espejar {
@@ -19,7 +21,7 @@ public class BloqueVidrio extends Bloque implements Espejar {
         // retorna el nuevo laser, asi luego se agrega al recorrido general
 
         Coordenada nuevaCoordenada = espejarLaser(direccion, ultPos, celda);
-        Direccion dir = Direccion.coordToDir(nuevaCoordenada);
+        Direccion dir = direccion.coordToDir(nuevaCoordenada);
         Laser nuevoLaser = new Laser(ultPos, dir);
         nuevoLaser.agregarPos(ultPos.sumar(nuevaCoordenada));
         laser.agregarPos(ultPos.sumar(dirPos));

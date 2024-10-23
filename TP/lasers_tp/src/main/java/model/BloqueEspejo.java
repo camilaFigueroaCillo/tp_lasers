@@ -1,5 +1,7 @@
 package model;
 
+import model.Direccion;
+
 import java.util.List;
 
 public class BloqueEspejo extends Bloque implements Espejar {
@@ -9,10 +11,11 @@ public class BloqueEspejo extends Bloque implements Espejar {
     }
 
     public boolean dirigirLaser(Laser laser, List<Laser> recorrido, Celda celda) {
+        Direccion direccionLaser = laser.getDireccion();
         Coordenada ultPos = laser.getUltimaPos();
-        Coordenada nueva = espejarLaser(laser.getDireccion(), ultPos, celda);
+        Coordenada nueva = espejarLaser(direccionLaser, ultPos, celda);
         Coordenada nuevaPos = ultPos.sumar(nueva);
-        Direccion dir = Direccion.coordToDir(nueva);
+        Direccion dir = direccionLaser.coordToDir(nueva);
         laser.cambiarDireccion(dir);
         laser.agregarPos(nuevaPos);
         return true;
