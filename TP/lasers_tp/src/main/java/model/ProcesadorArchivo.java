@@ -17,32 +17,9 @@ public class ProcesadorArchivo {
     private List<char[]> emisores = new ArrayList<>();
     private List<char[]> objetivos = new ArrayList<>();
 
-    public ProcesadorArchivo(URL ruta) throws IOException {
-        List<char[]> lineasArchivo = leerArchivo(ruta);
+    public ProcesadorArchivo(List<char[]> lineasArchivo) {
         desglosarInfo(lineasArchivo);
     }
-
-    private List<char[]> leerArchivo(URL ruta) throws IOException {
-        /*
-           Cada línea del archivo (string) se convierte a un char[], y ese
-           arreglo se guarda en un ArrayList llamado "lineasArchivo". Luego, se
-           devuelve ese arreglo.
-       */
-
-       List lineasArchivo = new ArrayList<char[]>();
-
-       try (BufferedReader br = new BufferedReader(new FileReader(new File(ruta.toURI())))) {
-           String linea;
-           while ((linea = br.readLine()) != null) {
-               char[] arr = linea.toCharArray();
-               lineasArchivo.add(arr);
-           }
-       } catch (URISyntaxException e) {
-           throw new RuntimeException(e);
-       }
-
-        return lineasArchivo;
-   }
 
     private void desglosarInfo(List<char[]> lineasArchivo) {
         /*
@@ -76,7 +53,6 @@ public class ProcesadorArchivo {
        }
     }
 
-
     public List<char[]> getInfoTablero() {
         //Retorna una lista de arreglos con la información del tablero
         return tablero;
@@ -93,7 +69,6 @@ public class ProcesadorArchivo {
             lasers = [
                 [columna, fila, direccion],
                 [columna, fila, direccion],
-                [columna, fila, direccion]
             ]
 
         */
@@ -128,7 +103,6 @@ public class ProcesadorArchivo {
             ------ EJEMPLO ------
 
             lasers = [
-                [columna, fila],
                 [columna, fila],
                 [columna, fila]
             ]

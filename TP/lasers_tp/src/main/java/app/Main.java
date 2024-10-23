@@ -9,14 +9,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import model.LectorArchivo;
 import model.Nivel;
 import model.ProcesadorArchivo;
 
 import java.io.*;
+import java.net.URL;
 import java.util.Map;
 
 public class Main extends Application {
     private Nivel nivel;
+    private LectorArchivo lectorArchivo = new LectorArchivo();
+    private LectorArchivo lectorReglas = new LectorArchivo();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -46,7 +50,10 @@ public class Main extends Application {
 
     private void cargarNivel(String rutaNivel, Stage stage) throws IOException {
         // Se crea el nivel (procesando el archivo .dat) y la vista (a partir de ese nivel)
-        this.nivel = new Nivel(new ProcesadorArchivo(getClass().getResource(rutaNivel)));
+
+        URL ruta = getClass().getResource(rutaNivel);
+        var infoNivel = lectorArchivo.getCaracteresArchivo(ruta);
+        this.nivel = new Nivel(new ProcesadorArchivo(infoNivel));
 
         // Se crea e inicializa el controlador que se comunicará con la información procesada y con la parte gráfica
         comenzarJuego(stage);
@@ -115,26 +122,29 @@ public class Main extends Application {
         });
 
         // agrega el listener para el boton 'reglas'
-        reglas.setOnAction(e -> mostrarReglas());
+        reglas.setOnAction(e -> {
+            try {
+                mostrarReglas();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
-    private void mostrarReglas() {
+    private void mostrarReglas() throws IOException {
+
         /* Muestra una ventana que contiene las reglas del juego */
 
         Stage reglas = new Stage();
         reglas.setTitle("Reglas del juego");
 
         VBox texto = new VBox(10);
+        URL ruta = getClass().getResource("/reglas.txt");
+        var reglasJuego = lectorReglas.getLineasArchivo(ruta);
 
-        try (InputStream archivo = getClass().getResourceAsStream("/reglas.txt");
-             BufferedReader lector = new BufferedReader(new InputStreamReader(archivo))) {
-
-            String linea;
-            while ((linea = lector.readLine()) != null) {
-                Label label = new Label(linea);
-                texto.getChildren().add(label);
-            }
-        } catch (IOException e) {
+        for (String regla: reglasJuego) {
+            Label label = new Label(regla);
+            texto.getChildren().add(label);
         }
 
         Scene scene = new Scene(texto, 600, 500);
