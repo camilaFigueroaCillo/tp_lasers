@@ -10,28 +10,22 @@ public class ObjetivoView {
     private static final int SIZE_CELDA = 80;
     private final int fila;
     private final int col;
-    private Objetivo obj;
+    private Color color;
 
-    public ObjetivoView(Objetivo obj) {
+    public ObjetivoView(Objetivo obj, Color color) {
         /* Constructor */
         var pos = obj.getCoordenada();
         this.fila = pos.getY();
         this.col = pos.getX();
-        this.obj = obj;
+        this.color = color;
     }
 
-    public Circle agregarObjetivo() {
-        /* Agrega el objetivo a la interfaz gráfica */
-        
-        Circle objGrafico;
+    public Circle crearObjetivo() {
+        /*Dibuja y devuelve el objetivo*/
 
-        // Marca el color y el borde según si fue apuntado o no
-        if (obj.fueApuntado()) {
-            objGrafico = new Circle(10, Color.INDIANRED);
-        } else {
-            objGrafico = new Circle(10, Color.WHITESMOKE);
-            objGrafico.setStroke(Color.RED);
-        }
+        // Marca el color y el borde
+        Circle objGrafico = new Circle(10, color);
+        objGrafico.setStroke(Color.RED);
 
         // Marca la ubicación
         objGrafico.setCenterX(SIZE_CELDA * col/DIM);

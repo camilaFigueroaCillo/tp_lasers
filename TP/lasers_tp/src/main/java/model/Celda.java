@@ -6,18 +6,16 @@ import java.util.List;
 
 public class Celda {
 
-    private Integer dimension;
     private boolean esPiso = true;
-    private Coordenada posIni;
     private Bloque bloque = null;
-    private List<Coordenada> impares;
+    private Coordenada posIni;
     private Coordenada centro;
+    private List<Coordenada> impares;
 
-    public Celda(int filaIni, int colIni, int dim) {
+    public Celda(int filaIni, int colIni) {
         this.posIni = new Coordenada(colIni, filaIni);
         this.impares = generarImpares();
-        this.centro = new Coordenada(colIni +1, filaIni + 1);
-        this.dimension = dim;
+        this.centro = new Coordenada(colIni + 1, filaIni + 1);
     }
 
     public void setTipo(Tipo tipo) {
@@ -93,7 +91,6 @@ public class Celda {
     public Coordenada getCentro() {
         return centro;
     }
-
 
 }
 

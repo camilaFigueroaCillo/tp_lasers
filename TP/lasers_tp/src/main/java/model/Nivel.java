@@ -7,15 +7,15 @@ import java.util.List;
 
 public class Nivel {
     private Tablero tablero;
-    private List<Laser> lasers = new ArrayList();
-    private List<Objetivo> objetivos = new ArrayList();
+    private List<Laser> lasers = new ArrayList<>();
+    private List<Objetivo> objetivos = new ArrayList<>();
     private Boolean ganador = false;
-    private HashSet objsApuntados = new HashSet<>();
+    private HashSet<Objetivo> objsApuntados = new HashSet<>();
     private List<Laser> nuevosLasers = new ArrayList<>();
     private HashMap<Coordenada, Celda> centros;
 
     public Nivel(ProcesadorArchivo procesador) {
-        this.tablero = new Tablero(procesador.getInfoTablero());
+        this.tablero = new Tablero(procesador.getInfoTablero(), 2);
         setLasers(procesador.getInfoEmisores());
         setObjetivos(procesador.getInfoObjetivos());
         this.centros = tablero.getCentros();
@@ -38,20 +38,8 @@ public class Nivel {
         }
     }
 
-    private void checkGanador() {
-
-        // actualiza el estado del ganador, si la cdad de objetivos apuntados corresponde a la cdad de objetivos en total
-        int cdadApuntados = objsApuntados.size();
-        int cdadObjetivos = objetivos.size();
-        if (cdadApuntados == cdadObjetivos) {
-            this.ganador = true;
-        }
-    }
-
-    public void moverLasers() {
-
+    public boolean moverLasers() {
         //Por cada laser en la lista de lasers, va recorriendo el tablero y actualizando el recorrido del laser.
-
         resetFromOrigin();
 
         var nuevos = new ArrayList<Laser>();
@@ -74,20 +62,7 @@ public class Nivel {
 
         apuntarObjetivos();
         checkGanador();
-
-    }
-
-    private void resetLasers() {
-        for (Laser l: lasers) {
-            l.resetRecorrido();
-        }
-    }
-
-    private void resetObjetivos() {
-        objsApuntados = new HashSet();
-        for (Objetivo o: objetivos) {
-            o.reset();
-        }
+        return true;
     }
 
     private void actualizarLaser(Laser l, int columnas, int filas, List<Laser> lasers) {
@@ -176,6 +151,16 @@ public class Nivel {
 
     }
 
+    private void checkGanador() {
+
+        // actualiza el estado del ganador, si la cdad de objetivos apuntados corresponde a la cdad de objetivos en total
+        int cdadApuntados = objsApuntados.size();
+        int cdadObjetivos = objetivos.size();
+        if (cdadApuntados == cdadObjetivos) {
+            this.ganador = true;
+        }
+    }
+
     public Boolean hayGanador() {
         return ganador;
     }
@@ -188,22 +173,37 @@ public class Nivel {
         return lasers;
     }
 
-    public List<Objetivo> getObjetivos() {
-        return objetivos;
+    public List<Objetivo> getObjetivosNoApuntados() {
+        List<Objetivo> noApuntados = new ArrayList<>();
+        for (Objetivo obj: objetivos) {
+            if (!objsApuntados.contains(obj)) {
+                noApuntados.add(obj);
+            }
+        }
+        return noApuntados;
     }
 
-    public int getFilas() {
-        return this.tablero.getFilas();
-    }
-
-    public int getColumnas() {
-        return this.tablero.getColumnas();
+    public List<Objetivo> getObjetivosApuntados() {
+        return new ArrayList<>(objsApuntados);
     }
 
     private void resetFromOrigin() {
         lasers.removeIf(l -> nuevosLasers.contains(l));
         resetLasers();
         resetObjetivos();
+    }
+
+    private void resetLasers() {
+        for (Laser l: lasers) {
+            l.resetRecorrido();
+        }
+    }
+
+    private void resetObjetivos() {
+        objsApuntados = new HashSet<>();
+        for (Objetivo o: objetivos) {
+            o.reset();
+        }
     }
 
 }

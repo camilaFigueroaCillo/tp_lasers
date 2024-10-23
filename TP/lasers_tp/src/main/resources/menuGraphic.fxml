@@ -56,7 +56,7 @@
                         </InnerShadow>
                      </effect>
                      <font>
-                        <Font name="Sansita Regular" size="16.0" />
+                        <Font name="Arial Bold Italic" size="18.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -71,7 +71,7 @@
                         </InnerShadow>
                      </effect>
                      <font>
-                        <Font name="Sansita Regular" size="16.0" />
+                        <Font name="Arial Bold Italic" size="18.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -86,7 +86,7 @@
                         </InnerShadow>
                      </effect>
                      <font>
-                        <Font name="Sansita Regular" size="16.0" />
+                        <Font name="Arial Bold Italic" size="18.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -101,7 +101,7 @@
                         </InnerShadow>
                      </effect>
                      <font>
-                        <Font name="Sansita Regular" size="16.0" />
+                        <Font name="Arial Bold Italic" size="18.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -116,7 +116,7 @@
                         </InnerShadow>
                      </effect>
                      <font>
-                        <Font name="Sansita Regular" size="16.0" />
+                        <Font name="Arial Bold Italic" size="18.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -131,7 +131,7 @@
                         </InnerShadow>
                      </effect>
                      <font>
-                        <Font name="Sansita Regular" size="16.0" />
+                        <Font name="Arial Bold Italic" size="18.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -139,14 +139,14 @@
                   </Button>
                </children>
             </VBox>
-            <Label fx:id="bienvenidosLabel" contentDisplay="CENTER" layoutX="102.0" layoutY="14.0" prefHeight="82.0" prefWidth="438.0" text="Bienvenido al Juego de Lasers" textAlignment="CENTER" textFill="#fffefe" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="bienvenidosLabel" contentDisplay="CENTER" layoutX="111.0" layoutY="21.0" prefHeight="82.0" prefWidth="418.0" text="Bienvenido al Juego de Lasers" textAlignment="CENTER" textFill="#fffefe" textOverrun="CENTER_ELLIPSIS">
                <font>
-                  <Font name="Sansita Regular" size="37.0" />
+                  <Font name="Arial Bold Italic" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="nivelLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="260.0" layoutY="76.0" prefHeight="41.0" prefWidth="121.0" text="Elija un nivel" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="nivelLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="76.0" prefHeight="41.0" prefWidth="191.0" text="Elija un nivel" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Sansita Regular" size="23.0" />
+                  <Font name="Arial Bold Italic" size="23.0" />
                </font>
             </Label>
       </children>

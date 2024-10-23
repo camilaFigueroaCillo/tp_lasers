@@ -5,14 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Tablero {
-    private static final int DIM = 2;
+    private int dimension;
     private int cols;
     private int filas;
     private List<Celda> celdas;
     private HashMap<Coordenada, Celda> centros;
 
-    public Tablero(List<char[]> tablero) {
+    public Tablero(List<char[]> tablero, int dimension) {
         /* crea el tablero, representado como una lista de celdas. */
+        this.dimension = dimension;
         this.filas = tablero.size();
         this.cols = tablero.get(0).length;
         this.celdas = llenarTablero(tablero, armarTablero());
@@ -21,9 +22,9 @@ public class Tablero {
 
     private List<Celda> armarTablero() {
         var table = new ArrayList<Celda>();
-        for (int i = 0; i < filas * DIM; i += DIM) {
-            for (int j = 0; j < cols * DIM; j += DIM) {
-                Celda celda = new Celda(i, j, DIM);
+        for (int i = 0; i < filas * dimension; i += dimension) {
+            for (int j = 0; j < cols * dimension; j += dimension) {
+                Celda celda = new Celda(i, j);
                 table.add(celda);
             }
         }

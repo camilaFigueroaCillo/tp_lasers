@@ -1,6 +1,7 @@
 package app;
 
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -17,20 +18,20 @@ import static model.Tipo.OPACOFIJO;
 
 public class TableroView {
     // Atributos
+    private static final int SIZE_CELDA = 80;
     private Rectangle bloqueSeleccionado = null;
     private double originalX, originalY;
-    private static final int SIZE_CELDA = 80;
     private Nivel nivel;
     private List<Celda> celdas;
     private int filas;
     private int cols;
 
-    public TableroView(List<Celda> celdas, int cols, int filas, Nivel nivel) {
+    public TableroView(Tablero tablero, Nivel nivel) {
         /* Constructor */
         this.nivel = nivel;
-        this.celdas = celdas;
-        this.filas = filas;
-        this.cols = cols;
+        this.celdas = tablero.getCeldas();
+        this.filas = tablero.getFilas();
+        this.cols = tablero.getColumnas();
     }
 
     public void render(Pane panel, Pane root) {
@@ -54,16 +55,18 @@ public class TableroView {
                 var cv = new CeldaView(celda);              // creamos su instancia de vista
 
                 var bloque = cv.render();
-                bloque.setOnMouseClicked(e -> manejarClick(bloque, root, panel));
+                bloque.setOnMouseClicked(_ -> manejarClick(bloque, root, panel, group));
                 group.getChildren().add(bloque);
             }
         }
 
     }
 
-    private void manejarClick(Rectangle bloque, Pane root, Pane panel) {
+    private void manejarClick(Rectangle bloque, Pane root, Pane panel, Group group) {
         if (bloqueSeleccionado == null) {
-            // Si no hay bloque seleccionado, ???
+
+            // Si no hay bloque seleccionado
+
             bloqueSeleccionado = bloque;
             originalX = bloque.getX();
             originalY = bloque.getY();
@@ -99,9 +102,10 @@ public class TableroView {
                 dibujarLaser(panel);
                 dibujarObjetivos(panel);
 
-                //Si hay ganador cambio el fondo a verde
                 if (nivel.hayGanador()) {
+                    //Si hay ganador cambio el fondo a verde
                     root.setStyle("-fx-background-color: #00FF00;");
+                    desactivarHandlers(group);
                 }
 
             } else {
@@ -109,11 +113,12 @@ public class TableroView {
                 Bloque b = celdaAnterior.getBloque();
                 Bloque c = celdaNueva.getBloque();
 
-                if  (b != null && b.getTipo() == OPACOFIJO) {
-                    mostrarAlerta(OPACOFIJO);
-                } else if (c != null || b == null) {
+                if (b == null || c != null) {
                     mostrarAlerta(null);
+                } else {
+                    mostrarAlerta(b.getTipo());
                 }
+
             }
 
             bloqueSeleccionado.setStrokeWidth(1);
@@ -126,10 +131,16 @@ public class TableroView {
             Para cada objetivo se crea su instancia de vista
             y se agrega a la interfaz grafica
         */
+        List<Objetivo> noApuntados = nivel.getObjetivosNoApuntados();
+        List<Objetivo> apuntados = nivel.getObjetivosApuntados();
+        agregarObjsAlPanel(noApuntados, Color.WHITESMOKE, panel);
+        agregarObjsAlPanel(apuntados, Color.INDIANRED, panel);
+    }
 
-        for (Objetivo obj: nivel.getObjetivos()) {
-            var objetivo = new ObjetivoView(obj);
-            var circle = objetivo.agregarObjetivo();
+    private void agregarObjsAlPanel(List<Objetivo> objs, Color color, Pane panel) {
+        for (Objetivo obj: objs) {
+            var objetivo = new ObjetivoView(obj, color);
+            var circle = objetivo.crearObjetivo();
             panel.getChildren().add(circle);
         }
     }
@@ -160,12 +171,21 @@ public class TableroView {
 
         if (tipo == OPACOFIJO) {
             renglon = new Label("Recuerda que los bloques fijos no pueden moverse!");
-        } else {
+        } else if (tipo == null) {
             renglon = new Label("El origen debe ser un bloque, y el destino una celda vacia");
+        } else {
+            // En otro caso no se debe mostrar alerta
+            return;
         }
 
         Scene scene = new Scene(renglon, 400, 400);
         alerta.setScene(scene);
         alerta.show();
+    }
+
+    private void desactivarHandlers(Group group) {
+        for (Node node : group.getChildren()) {
+            node.setOnMouseClicked(null);
+        }
     }
 }

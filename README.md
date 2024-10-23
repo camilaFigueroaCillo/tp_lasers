@@ -1,3 +1,11 @@
+# TP1 - Lasers
+
+## Integrantes
+
+- Bruno Kuznicki - Padrón: 111413 - GitHub: @brunokzz
+- Camila Figueroa Cillo - Padrón: 11204 - GitHub: @camilaFigueroaCillo
+
+
 ## ACLARACIONES
 
 ## CENTROS

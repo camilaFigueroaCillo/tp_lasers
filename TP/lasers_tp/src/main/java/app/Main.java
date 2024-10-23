@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.Nivel;
@@ -15,10 +14,6 @@ import model.ProcesadorArchivo;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.Objects;
-
-import static javafx.scene.paint.Color.BLACK;
-
 
 public class Main extends Application {
 
@@ -30,6 +25,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Juego de Lasers");
         mostrarMenu(primaryStage);
     }
 
@@ -88,23 +84,21 @@ public class Main extends Application {
     }
 
     public void comenzarJuego(Stage primaryStage) throws IOException {
-        //Cargo el fxml
+        // Cargo el fxml
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gamePane2.fxml"));
         Pane root = loader.load();
         Pane panel = (Pane) root.lookup("#tableGame");
 
         nivel.moverLasers();
 
-        //Dibujo tablero
-        var COLS = nivel.getColumnas();
-        var ROWS = nivel.getFilas();
-        var tablero = new TableroView(nivel.getTablero().getCeldas(), COLS, ROWS, nivel);
+        // Dibujo tablero
+        var tablero = new TableroView(nivel.getTablero(), nivel);
         tablero.render(panel, root);
 
-        //Seteo handlers de botones
+        // Seteo handlers de botones
         setButtons(root, primaryStage);
 
-        //Mostrar escena
+        // Mostrar escena
         Scene scene = new Scene(root, 640, 550);
         primaryStage.setScene(scene);
         primaryStage.show();
