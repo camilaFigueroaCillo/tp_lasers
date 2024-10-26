@@ -2,8 +2,9 @@
 
 ## Integrantes
 
-- Bruno Kuznicki - Padrón: 111413 - GitHub: @brunokzz
-- Camila Figueroa Cillo - Padrón: 11204 - GitHub: @camilaFigueroaCillo
+- Bruno Kuznicki - Padrón: 111413 - GitHub: [@brunokzz](https://github.com/brunokzz)
+
+- Camila Figueroa Cillo - Padrón: 11204 - GitHub: [@camilaFigueroaCillo](https://github.com/camilaFigueroaCillo)
 
 
 ## ACLARACIONES
