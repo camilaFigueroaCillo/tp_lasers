@@ -40,4 +40,4 @@ Debido a que una coordenada puede existir sin un laser o sin un objetivo, se opt
 
 
 ## INTERFAZ Espejar
-Tanto el BloqueVidrio como el BloqueEspejo necesitan espejar el láser, y para evitar herencias entre ellas se creó la interfaz Espejar que es implementada por ambas clases. De esta manera, se evita repetir código para clases que hacen la misma acción respecto al laser.
+Tanto el BloqueVidrio como el BloqueEspejo necesitan espejar el láser, y para evitar herencias entre ellas se creó la interfaz Espejar que es implementada por ambas clases.
